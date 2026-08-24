@@ -10,7 +10,7 @@
   --muted: #806b58;
   --danger: #8c3b2e;
   --shadow: rgba(74, 47, 32, .2);
-  --background-image: url("bg light.jpgg");
+  --background-image: url("bg light.jpg");
 }
 
 body.dark-theme {
