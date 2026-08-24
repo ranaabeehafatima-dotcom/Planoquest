@@ -1,78 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quest Journal</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Journal</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>⚔️ Quest Journal</h1>
-    <p>Turn your daily goals into heroic achievements.</p>
-  </header>
+  <section id="homeScreen" class="home-screen">
+    <div class="home-content">
+      <p class="home-eyebrow">YOUR ADVENTURE AWAITS</p>
+    </div>
 
-  <main>
-    <aside>
-      <section class="card profile">
-        <div class="avatar">👤</div>
-        <h2>Adventurer</h2>
-        <p class="muted">Level <span id="level">1</span></p>
-
-        <div class="xp-section">
-          <div class="muted xp-label">
-            XP <span><span id="xp">0</span> / 100</span>
-          </div>
-          <div class="progress">
-            <span id="progress"></span>
-          </div>
-        </div>
-
-        <button id="restartButton" class="restart-button" type="button">
-          Restart Journey
-        </button>
-      </section>
-
-      <section class="card streak-card">
-        <div class="streak-icon">🔥</div>
-        <strong><span id="streak">0</span> Day Streak</strong>
-        <p class="muted streak-description">Build your legend!</p>
-      </section>
+    <aside class="home-bar" aria-label="Home navigation">
+      <button id="openJournalButton" class="circle-button" type="button"
+        aria-label="Open Daily Journal" title="Open Daily Journal">⚔️</button>
+      <button id="openCalendarButton" class="circle-button" type="button"
+        aria-label="Open Calendar" title="Open Calendar">📅</button>
     </aside>
 
-    <section>
-      <h2>Today's Challenges</h2>
+    <button id="deleteAllTasksButton" class="delete-all-tasks-button" type="button">
+      Delete All Tasks
+    </button>
 
-      <div class="stats">
-        <div class="stat">
-          <span class="muted">Total Quests</span>
-          <strong id="total">0</strong>
+    <button id="modeButton" class="mode-button" type="button"
+      aria-label="Select mode" title="Select Mode">◐</button>
+  </section>
+
+  <section id="modePage" class="mode-page" hidden>
+    <div class="mode-container">
+      <h1>Select Mode</h1>
+      <div class="mode-options">
+        <button id="lightModeButton" class="mode-option" type="button">
+          Light Mode
+        </button>
+        <button id="darkModeButton" class="mode-option" type="button">
+          Dark mode
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="journalPage" class="journal-page" hidden>
+    <header class="journal-header">
+      <button id="backHomeButton" class="back-home-button" type="button">←</button>
+      <h1>⚔️ Daily Journal</h1>
+      <p id="journalDateText" class="journal-date"></p>
+      <p>Record your productive achievements to unlock in game mysteries</p>
+    </header>
+
+    <main>
+      <aside>
+        <section class="card profile">
+          <div class="avatar">👤</div>
+          <h2>Me</h2>
+          <div class="xp-section">
+            <div class="muted xp-label">XP <span id="xp">0 / 100</span></div>
+            <div class="progress"><span id="progress"></span></div>
+          </div>
+
+          <label class="muted" for="timezoneSelect">Time standard</label>
+          <select id="timezoneSelect"></select>
+          <button id="restartButton" class="restart-button" type="button">
+            Restart Journey
+          </button>
+        </section>
+      </aside>
+
+      <section>
+        <h2>To Do List</h2>
+        <div class="stats">
+          <div class="stat"><span class="muted">Total Quests</span><strong id="total">0</strong></div>
+          <div class="stat"><span class="muted">Completed</span><strong id="completed">0</strong></div>
         </div>
-        <div class="stat">
-          <span class="muted">Completed</span>
-          <strong id="completed">0</strong>
+
+        <div class="card">
+          <form id="questForm">
+            <input id="questTitle" type="text" placeholder="Enter a new task" required>
+            <select id="difficulty">
+              <option value="0">No specific time · 5 XP</option>
+              <option value="1" selected>For 5 min · 10 XP</option>
+              <option value="2">For 10 min · 15 XP</option>
+              <option value="3">For 15 min · 20 XP</option>
+              <option value="4">For 20 min · 30 XP</option>
+              <option value="5">For 30 min · 35 XP</option>
+              <option value="6">For 40 min · 40 XP</option>
+              <option value="7">For 50 min · 45 XP</option>
+              <option value="8">For 1 hour · 60 XP</option>
+              <option value="9">For 2 hours · 80 XP</option>
+              <option value="10">For 3 hours · 100 XP</option>
+              <option value="11">For 4 hours · 120 XP</option>
+              <option value="12">For 5 hours · 140 XP</option>
+              <option value="13">For 6 hours · 160 XP</option>
+              <option value="14">For 7 hours · 180 XP</option>
+              <option value="15">For 8 hours · 200 XP</option>
+            </select>
+            <button class="add-button" type="submit">Add Task</button>
+          </form>
+          <div id="questList" class="quest-list"></div>
         </div>
-        <div class="stat">
-          <span class="muted">Lifetime XP</span>
-          <strong id="totalXp">0</strong>
-        </div>
+      </section>
+    </main>
+  </section>
+
+  <section id="calendarPage" class="calendar-page" hidden>
+    <button id="backCalendarHomeButton" class="back-home-button" type="button">←</button>
+    <div class="calendar-container">
+      <div class="calendar-heading">
+        <h1>Calendar</h1>
+        <p id="selectedDateText"></p>
+        <label class="muted" for="calendarTimezoneSelect">Time standard</label>
+        <select id="calendarTimezoneSelect"></select>
       </div>
 
-      <div class="card">
-        <form id="questForm">
-          <input id="questTitle" type="text" placeholder="Enter a new quest..." required />
-          <select id="difficulty">
-            <option value="easy">Easy · 10 XP</option>
-            <option value="medium" selected>Medium · 25 XP</option>
-            <option value="hard">Hard · 50 XP</option>
-          </select>
-          <button class="add-button" type="submit">Add Quest</button>
-        </form>
-
-        <div id="questList" class="quest-list"></div>
+      <div class="calendar-controls">
+        <button id="previousMonthButton" type="button">‹</button>
+        <h2 id="calendarMonth"></h2>
+        <button id="nextMonthButton" type="button">›</button>
       </div>
-    </section>
-  </main>
+
+      <div class="calendar-weekdays">
+        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span>
+        <span>Thu</span><span>Fri</span><span>Sat</span>
+      </div>
+      <div id="calendarDays" class="calendar-days"></div>
+    </div>
+  </section>
 
   <script src="script.js"></script>
 </body>
