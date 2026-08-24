@@ -220,6 +220,7 @@ function render() {
       const timerText = timerRunning
         ? ` · ${formatTimer(activeTimer.remaining)}`
         : "";
+      const toggleDisabled = timerRunning ? "disabled" : "";
 
       return `
         <div class="quest ${task.done ? "completed" : ""}">
@@ -232,6 +233,7 @@ function render() {
 
           <button class="check" type="button" data-action="toggle"
             data-id="${escape(task.id)}"
+            ${toggleDisabled}
             aria-label="${task.done ? "Mark task incomplete" : "Mark task complete"}">
             ${task.done ? "✓" : ""}
           </button>
@@ -381,6 +383,11 @@ questList.addEventListener("click", event => {
   }
 
   if (button.dataset.action === "toggle") {
+    // Prevent toggling if timer is running on this task
+    if (activeTimer?.taskId === task.id) {
+      return;
+    }
+
     task.done = !task.done;
 
     if (task.done && !task.xpAwarded) {
