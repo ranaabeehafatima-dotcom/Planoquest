@@ -10,7 +10,7 @@
   --muted: #806b58;
   --danger: #8c3b2e;
   --shadow: rgba(74, 47, 32, .2);
-  --background-image: url("https://uploads.onecompiler.io/44z7hquft/1787590745930/bg%20light.jpg");
+  --background-image: url("visual bg 2.jpg");
 }
 
 body.dark-theme {
@@ -25,7 +25,7 @@ body.dark-theme {
   --muted: #22283b;
   --danger: #425061;
   --shadow: rgba(34, 40, 59, .4);
-  --background-image: url("https://uploads.onecompiler.io/44z7hquft/1787590736984/visual%20bg%202.jpg");
+  --background-image: url("visual bg 2.jpg");
 }
 
 * {
